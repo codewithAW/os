@@ -1,0 +1,522 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #eef2f7;
+  --surface: #ffffff;
+  --surface-elevated: #f1f5f9;
+  --surface-overlay: rgba(15, 23, 36, 0.04);
+  --text-primary: #0f1724;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --accent: #0ea5e9;
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --border: #d2dce9;
+  --scroll-thumb: #cbd5e1;
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 10px 30px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 20px 60px rgba(15, 23, 42, 0.1);
+  --radius-card: 1rem;
+  --radius-pill: 9999px;
+  color-scheme: light;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Inter', sans-serif;
+  --text-color: var(--text-primary);
+  --bg-color: var(--bg-primary);
+}
+
+/* Dark theme: modern, eye-friendly charcoal */
+.dark {
+  --bg-primary: #090c16;
+  --bg-secondary: #0f1724;
+  --surface: #0f1724;
+  --surface-elevated: #111827;
+  --surface-overlay: rgba(255, 255, 255, 0.04);
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --accent: #093244;
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --border: #172033;
+  --scroll-thumb: #24333f;
+  --shadow-sm: 0 1px 2px rgba(2, 6, 23, 0.6);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.45);
+  --radius-card: 1rem;
+  --radius-pill: 9999px;
+  color-scheme: dark;
+  --text-color: var(--text-primary);
+  --bg-color: var(--bg-primary);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+  background-color: var(--bg-primary);
+  color: var(--text-color);
+  font-family: var(--font-family, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Inter', sans-serif);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Scrollbar styling */
+
+/* Improve readability: map common Tailwind text utility colors used for
+   body/description to theme-aware tokens. This avoids editing many files
+   and ensures consistent contrast in dark mode. */
+.text-slate-50,
+.text-slate-100,
+.text-slate-200,
+.text-slate-300,
+.text-slate-400,
+.text-slate-500,
+.text-gray-300,
+.text-gray-400 {
+  color: var(--text-muted) !important;
+}
+
+/* Ensure small captions/descriptions use a slightly larger size and
+   the muted color token (adjusted to white in dark mode). */
+.text-caption {
+  @apply text-base;
+  color: var(--text-muted);
+}
+
+/* Remove opacity-based visual lowering for text: neutralize common
+   opacity utility effects on paragraphs and description blocks. */
+.opacity-70,
+.opacity-60,
+.opacity-50 {
+  opacity: 1 !important;
+}
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scroll-thumb);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scroll-thumb);
+}
+
+/* Typography base styles */
+@layer base {
+  h1 {
+    @apply text-6xl font-bold leading-none tracking-tight;
+    color: var(--text-color);
+  }
+
+  h2 {
+    @apply text-4xl font-semibold leading-snug tracking-tight;
+    color: var(--text-color);
+  }
+
+  h3 {
+    @apply text-2xl font-semibold leading-snug;
+    color: var(--text-color);
+  }
+
+  h4 {
+    @apply text-xl font-semibold leading-snug;
+    color: var(--text-color);
+  }
+
+  p {
+    /* Increase paragraph size by one Tailwind step for readability */
+    @apply text-lg leading-relaxed;
+    color: var(--text-body);
+  }
+
+  a {
+    @apply transition-colors duration-200;
+    color: var(--text-color);
+  }
+}
+
+/* Make Tailwind's `text-white` utility respect the theme variable so
+   components that still use `text-white` don't become unreadable in
+   light mode. This repurposes the utility to be theme-aware. */
+.text-white {
+  color: var(--text-color) !important;
+}
+
+/* Ensure form controls, navigation, tables, headers, and footers use
+   the theme text color by default. Individual components that need
+   different contrast can override this. */
+button,
+input,
+textarea,
+select,
+table,
+th,
+td,
+nav,
+header,
+footer,
+aside,
+.card {
+  color: var(--text-color);
+}
+
+/* Component base styles */
+@layer components {
+  /* Surface layers */
+  .surface-base {
+    background-color: var(--surface-base);
+    border: 1px solid var(--border);
+    color: var(--text-color);
+  }
+
+  .surface-elevated {
+    background-color: var(--surface-elevated);
+    border: 1px solid var(--border);
+    color: var(--text-color);
+  }
+
+  .surface-overlay {
+    background-color: var(--surface-overlay);
+    border: 1px solid var(--border);
+    color: var(--text-color);
+    backdrop-filter: blur(12px);
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-3 py-1 text-sm font-semibold transition-interactive;
+    color: var(--text-color);
+  }
+
+  .btn-accent {
+    background-color: var(--accent);
+    color: var(--surface-base);
+  }
+
+  .btn-secondary {
+    background-color: var(--surface-elevated);
+    border: 1px solid var(--border);
+    color: var(--text-color);
+  }
+
+  .btn-muted {
+    background-color: var(--surface-base);
+    border: 1px solid var(--border);
+    color: var(--text-body);
+  }
+
+  .btn-success {
+    background-color: #22C55E;
+    color: var(--surface-base);
+  }
+
+  .btn-warning {
+    background-color: #EAB308;
+    color: var(--surface-base);
+  }
+
+  .btn-danger {
+    background-color: #EF4444;
+    color: var(--surface-base);
+  }
+
+  .cell-active {
+    background-color: var(--accent);
+    color: var(--surface-base);
+  }
+
+  .cell-progress {
+    background-color: var(--surface-elevated);
+    color: var(--text-body);
+  }
+
+  .cell-idle {
+    background-color: var(--surface-overlay);
+    color: var(--text-muted);
+  }
+
+  .signal-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 9999px;
+    border: 1px solid var(--border);
+    background-color: var(--surface-overlay);
+    color: var(--text-body);
+    font-size: 0.825rem;
+  }
+
+  .signal-chip.active {
+    background-color: var(--accent);
+    border-color: transparent;
+    color: var(--surface-base);
+  }
+
+  .text-primary {
+    color: var(--text-primary) !important;
+  }
+
+  .text-muted {
+    color: var(--text-muted) !important;
+  }
+
+  .text-accent {
+    color: var(--accent) !important;
+  }
+
+  .text-success {
+    color: var(--success) !important;
+  }
+
+  .text-warning {
+    color: var(--warning) !important;
+  }
+
+  .text-danger {
+    color: var(--danger) !important;
+  }
+
+  .bg-surface-base {
+    background-color: var(--surface-base) !important;
+  }
+
+  .bg-surface-elevated {
+    background-color: var(--surface-elevated) !important;
+  }
+
+  .bg-surface-overlay {
+    background-color: var(--surface-overlay) !important;
+  }
+
+  .border-base {
+    border-color: var(--border) !important;
+  }
+
+  .glass-card {
+    background-color: var(--surface-overlay);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(18px);
+  }
+
+  .bg-accent-soft {
+    background-color: var(--accent-soft) !important;
+  }
+
+  .border-accent-soft {
+    border-color: var(--accent-border) !important;
+  }
+
+  .bg-success-soft {
+    background-color: var(--success-soft) !important;
+  }
+
+  .border-success-soft {
+    border-color: var(--success-border) !important;
+  }
+
+  .bg-warning-soft {
+    background-color: var(--warning-soft) !important;
+  }
+
+  .border-warning-soft {
+    border-color: var(--warning-border) !important;
+  }
+
+  .bg-danger-soft {
+    background-color: var(--danger-soft) !important;
+  }
+
+  .border-danger-soft {
+    border-color: var(--danger-border) !important;
+  }
+
+  .surface-card {
+    background-color: var(--surface-base);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    box-shadow: var(--shadow-sm);
+    color: var(--text-body);
+  }
+
+  .surface-panel {
+    background-color: var(--surface-elevated);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    color: var(--text-body);
+  }
+
+  .shadow-glow {
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.16);
+  }
+
+  .transition-interactive {
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease,
+      transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .flow-step {
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    padding: 1rem;
+    background-color: var(--surface-base);
+    color: var(--text-body);
+    font-size: 0.95rem;
+  }
+
+  .flow-step + .flow-step {
+    margin-top: 0.75rem;
+  }
+
+  /* Text utilities */
+  .text-label {
+    @apply text-xs font-semibold uppercase tracking-wider;
+    color: var(--text-muted);
+  }
+  .text-caption {
+    @apply text-base font-normal;
+    color: var(--text-muted);
+  }
+  .text-secondary {
+    color: var(--text-muted);
+  }
+
+  .text-tertiary {
+    color: var(--text-muted);
+  }
+
+  /* Semantic text helpers used by new components */
+  .text-body {
+    color: var(--text-body) !important;
+  }
+
+  .text-muted {
+    color: var(--text-muted) !important;
+  }
+
+  /* Interactive utilities */
+  .transition-interactive {
+    @apply transition-all duration-200 ease-out;
+  }
+
+  .focus-ring {
+    @apply outline-none ring-2 ring-blue-500 ring-offset-2 ring-offset-slate-900;
+  }
+
+  /* Divider */
+  .divider {
+    @apply border-t border-slate-700;
+  }
+}
+
+/* Utility classes for consistent spacing */
+@layer utilities {
+  .gap-section {
+    @apply gap-8;
+  }
+
+  .px-section {
+    @apply px-6 sm:px-8;
+  }
+
+  .py-section {
+    @apply py-8 sm:py-12;
+  }
+
+  .rounded-lg-safe {
+    @apply rounded-lg;
+  }
+}
+
+/* Override common Tailwind background utilities to use theme surfaces
+   This makes many existing components immediately theme-aware without
+   changing their markup. Use !important to win over compiled utilities. */
+.bg-slate-950\/80,
+.bg-slate-950,
+.bg-slate-900\/80,
+.bg-slate-900,
+.bg-slate-800,
+.bg-slate-750,
+.bg-slate-700,
+.bg-slate-600 {
+  background-color: var(--surface-base) !important;
+  color: var(--text-color) !important;
+}
+
+/* Map thin dark borders and white/transparent borders to theme border */
+.border-white\/10,
+.border-white\/20,
+.border-slate-700,
+.border-slate-600,
+.border-cyan-300\/10,
+.border-cyan-300\/30 {
+  border-color: var(--border) !important;
+}
+
+/* Ensure buttons and badges that used `text-white` remain readable but
+   use the theme-aware color for general text elsewhere. Accent backgrounds
+   should keep their color but text color inside will be theme-aware. */
+.bg-blue-500,
+.bg-cyan-500,
+.bg-amber-600,
+.bg-red-600,
+.bg-green-600 {
+  color: var(--text-color) !important;
+}
+
+/* Neutralize low-opacity text utilities so they don't reduce contrast */
+.text-opacity-60,
+.text-opacity-70,
+.opacity-70,
+.opacity-60,
+.opacity-50 {
+  opacity: 1 !important;
+}
+
+/* Make sure svg/icon color utilities used as text adapt to theme */
+.text-slate-50,
+.text-slate-100,
+.text-slate-200,
+.text-slate-300,
+.text-slate-400,
+.text-slate-500,
+.text-slate-600,
+.text-gray-300,
+.text-gray-400,
+.text-gray-500 {
+  color: var(--text-muted) !important;
+}
+
+/* Small helpers */
+.surface-base {
+  background-color: var(--surface-base) !important;
+  border-color: var(--border) !important;
+  color: var(--text-color) !important;
+}
+
+.surface-elevated {
+  background-color: var(--surface-elevated) !important;
+  border-color: var(--border) !important;
+  color: var(--text-color) !important;
+}
+
+.accent {
+  color: var(--accent) !important;
+}
