@@ -1,15 +1,16 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect } from 'react';
+import { Suspense, lazy, useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { useAppStore } from './stores/useAppStore';
 import Layout from './components/Layout';
-import HomePage from './pages/HomePage';
-import CpuPage from './pages/CpuPage';
-import ProcessorPage from './pages/ProcessorPage';
-import ProcessManagementPage from './pages/ProcessManagementPage';
-import ThreadManagementPage from './pages/ThreadManagementPage';
-import InstructionPage from './pages/InstructionPage';
-import NotFoundPage from './pages/NotFoundPage';
+
+const HomePage = lazy(() => import('./pages/HomePage'));
+const CpuPage = lazy(() => import('./pages/CpuPage'));
+const ProcessorPage = lazy(() => import('./pages/ProcessorPage'));
+const ProcessManagementPage = lazy(() => import('./pages/ProcessManagementPage'));
+const ThreadManagementPage = lazy(() => import('./pages/ThreadManagementPage'));
+const InstructionPage = lazy(() => import('./pages/InstructionPage'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 function App() {
   const theme = useAppStore((state) => state.theme);
@@ -34,15 +35,23 @@ function App() {
             transition={{ duration: 0.35 }}
             className="px-4 pb-16 pt-6 md:px-8 lg:px-12 min-w-0"
           >
-            <Routes location={location}>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/cpu" element={<CpuPage />} />
-              <Route path="/processor-info" element={<ProcessorPage />} />
-              <Route path="/process-management" element={<ProcessManagementPage />} />
-              <Route path="/thread-management" element={<ThreadManagementPage />} />
-              <Route path="/instruction-management" element={<InstructionPage />} />
-              <Route path="*" element={<NotFoundPage />} />
-            </Routes>
+            <Suspense
+              fallback={
+                <div className="min-h-[240px] flex items-center justify-center rounded-3xl border border-white/10 bg-slate-950/80 text-sm text-slate-300">
+                  Loading page...
+                </div>
+              }
+            >
+              <Routes location={location}>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/cpu" element={<CpuPage />} />
+                <Route path="/processor-info" element={<ProcessorPage />} />
+                <Route path="/process-management" element={<ProcessManagementPage />} />
+                <Route path="/thread-management" element={<ThreadManagementPage />} />
+                <Route path="/instruction-management" element={<InstructionPage />} />
+                <Route path="*" element={<NotFoundPage />} />
+              </Routes>
+            </Suspense>
           </motion.div>
         </AnimatePresence>
       </Layout>

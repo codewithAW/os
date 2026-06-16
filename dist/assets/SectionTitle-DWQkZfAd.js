@@ -1,0 +1,1 @@
+import{A as e}from"./vendor-Cadn7ow-.js";var t=e();function n({title:e,subtitle:n}){return(0,t.jsxs)(`div`,{className:`mb-6 space-y-2`,children:[(0,t.jsx)(`p`,{className:`text-xs uppercase tracking-[0.36em] text-cyan-300/70`,children:n}),(0,t.jsx)(`h2`,{className:`text-3xl font-semibold text-white sm:text-4xl`,children:e})]})}export{n as t};

@@ -652,7 +652,7 @@ export default function ProcessManagementPage() {
             </div>
 
             {liveFlowMode && (
-              <div className="mt-6 space-y-6 rounded-lg border border-cyan-300/10 bg-slate-950/70 p-6">
+              <div className="mt-6 space-y-6 rounded-lg border border-gray-200 bg-gray-100 p-6 shadow-lg">
                 <SimulationControls
                   liveFlowMode={liveFlowMode}
                   isRunning={isRunning}

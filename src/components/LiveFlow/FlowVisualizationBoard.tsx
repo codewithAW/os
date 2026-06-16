@@ -10,23 +10,23 @@ interface FlowVisualizationBoardProps {
 export default function FlowVisualizationBoard({ running, readyQueue, blockedQueue, completed }: FlowVisualizationBoardProps) {
   return (
     <div className="grid gap-6 xl:grid-cols-[1.4fr_0.8fr]">
-      <div className="rounded-[28px] border border-white/10 bg-slate-900/80 p-6">
+      <div className="rounded-[28px] border border-[#d8c9b0] bg-[#f7f3eb] p-6 shadow-lg">
         <div className="mb-5 flex items-center justify-between">
           <div>
             <p className="text-sm uppercase tracking-[0.32em] text-cyan-300/70">Execution flow</p>
-            <h3 className="mt-2 text-lg font-semibold text-white">Active CPU Flow</h3>
+            <h3 className="mt-2 text-lg font-semibold text-[var(--text-primary)]">Active CPU Flow</h3>
           </div>
-          <div className="rounded-3xl bg-slate-950/80 px-4 py-2 text-sm text-slate-200">Live queue state</div>
+          <div className="rounded-3xl bg-[#faf1e3] px-4 py-2 text-sm text-[var(--text-primary)] shadow-md">Live queue state</div>
         </div>
 
         <div className="space-y-5">
           <div className="grid gap-3 md:grid-cols-2">
-            <div className="rounded-3xl bg-slate-950/80 p-4">
-              <p className="text-sm text-slate-400">Ready Queue</p>
+            <div className="rounded-3xl bg-[#faf1e3] p-4 shadow-md">
+              <p className="text-sm text-[var(--text-secondary)]">Ready Queue</p>
               <div className="mt-3 space-y-3">
                 <AnimatePresence mode="popLayout">
                   {readyQueue.length === 0 ? (
-                    <p className="text-slate-500">No ready processes</p>
+                    <p className="text-[var(--text-secondary)]">No ready processes</p>
                   ) : (
                     readyQueue.map((id) => (
                       <motion.div
@@ -35,7 +35,7 @@ export default function FlowVisualizationBoard({ running, readyQueue, blockedQue
                         initial={{ opacity: 0, y: 12 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -12 }}
-                        className="rounded-3xl border border-cyan-300/15 bg-slate-900/90 px-4 py-3 text-slate-100"
+                        className="rounded-3xl border border-cyan-300/15 bg-[#f9f2e7] px-4 py-3 text-[var(--text-primary)]"
                       >
                         {id}
                       </motion.div>
@@ -45,12 +45,12 @@ export default function FlowVisualizationBoard({ running, readyQueue, blockedQue
               </div>
             </div>
 
-            <div className="rounded-3xl bg-slate-950/80 p-4">
-              <p className="text-sm text-slate-400">Blocked Queue</p>
+            <div className="rounded-3xl bg-[#faf1e3] p-4 shadow-md">
+              <p className="text-sm text-[var(--text-secondary)]">Blocked Queue</p>
               <div className="mt-3 space-y-3">
                 <AnimatePresence mode="popLayout">
                   {blockedQueue.length === 0 ? (
-                    <p className="text-slate-500">No blocked processes</p>
+                    <p className="text-[var(--text-secondary)]">No blocked processes</p>
                   ) : (
                     blockedQueue.map((id) => (
                       <motion.div
@@ -59,7 +59,7 @@ export default function FlowVisualizationBoard({ running, readyQueue, blockedQue
                         initial={{ opacity: 0, x: 12 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -12 }}
-                        className="rounded-3xl border border-amber-300/15 bg-slate-900/90 px-4 py-3 text-slate-100"
+                        className="rounded-3xl border border-amber-300/15 bg-[#f9f2e7] px-4 py-3 text-[var(--text-primary)]"
                       >
                         {id}
                       </motion.div>
@@ -70,20 +70,20 @@ export default function FlowVisualizationBoard({ running, readyQueue, blockedQue
             </div>
           </div>
 
-          <div className="rounded-3xl bg-slate-950/80 p-4">
-            <p className="text-sm text-slate-400">CPU Cores</p>
+          <div className="rounded-3xl bg-[#faf1e3] p-4 shadow-md">
+            <p className="text-sm text-[var(--text-secondary)]">CPU Cores</p>
             <div className="mt-4 grid gap-3 md:grid-cols-2">
               {running.map((slot) => (
                 <motion.div
                   layout
                   key={slot.coreId}
-                  className="rounded-3xl border border-white/10 bg-slate-900/90 p-4"
+                  className="rounded-3xl border border-[#d8c9b0] bg-[#f9f2e7] p-4"
                 >
-                  <p className="text-sm text-slate-400">Core {slot.coreId}</p>
-                  <p className="mt-2 text-lg font-semibold text-white">
+                  <p className="text-sm text-[var(--text-secondary)]">Core {slot.coreId}</p>
+                  <p className="mt-2 text-lg font-semibold text-[var(--text-primary)]">
                     {slot.process ? slot.process.id : 'Idle'}
                   </p>
-                  <p className="mt-1 text-slate-400">
+                  <p className="mt-1 text-[var(--text-secondary)]">
                     {slot.process ? `${slot.process.remaining} cycles remaining` : 'No work assigned'}
                   </p>
                 </motion.div>
@@ -93,12 +93,12 @@ export default function FlowVisualizationBoard({ running, readyQueue, blockedQue
         </div>
       </div>
 
-      <div className="rounded-[28px] border border-white/10 bg-slate-900/80 p-6">
+      <div className="rounded-[28px] border border-[#d8c9b0] bg-[#f7f3eb] p-6 shadow-lg">
         <p className="text-sm uppercase tracking-[0.32em] text-cyan-300/70">Completion log</p>
         <div className="mt-5 space-y-3">
           <AnimatePresence mode="popLayout">
             {completed.length === 0 ? (
-              <p className="text-slate-500">No completed processes yet</p>
+              <p className="text-[var(--text-secondary)]">No completed processes yet</p>
             ) : (
               completed.map((id) => (
                 <motion.div
@@ -107,7 +107,7 @@ export default function FlowVisualizationBoard({ running, readyQueue, blockedQue
                   initial={{ opacity: 0, x: -12 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: 12 }}
-                  className="rounded-3xl border border-emerald-300/15 bg-slate-950/90 px-4 py-3 text-slate-100"
+                  className="rounded-3xl border border-emerald-300/15 bg-[#f9f2e7] px-4 py-3 text-[var(--text-primary)]"
                 >
                   {id} completed
                 </motion.div>

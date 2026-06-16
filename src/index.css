@@ -7,10 +7,10 @@
   --bg-secondary: #eef2f7;
   --surface: #ffffff;
   --surface-elevated: #f1f5f9;
-  --surface-overlay: rgba(15, 23, 36, 0.04);
+  --surface-overlay: rgba(191, 194, 197, 0.04);
   --text-primary: #0f1724;
   --text-secondary: #334155;
-  --text-muted: #64748b;
+  --text-muted: #000000;
   --accent: #0ea5e9;
   --success: #22c55e;
   --warning: #f59e0b;

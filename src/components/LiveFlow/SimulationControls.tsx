@@ -28,17 +28,17 @@ export default function SimulationControls({
   onSeek,
 }: SimulationControlsProps) {
   return (
-    <div className="space-y-5 rounded-[28px] border border-white/10 bg-slate-900/80 p-5">
+    <div className="space-y-5 rounded-[28px] border border-[#d8c9b0] bg-[#f9f4e8] p-5 shadow-xl">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p className="text-sm uppercase tracking-[0.35em] text-cyan-300/70">Live Flow Control</p>
-          <h3 className="mt-3 text-xl font-semibold text-white">Simulation Controls</h3>
+          <h3 className="mt-3 text-xl font-semibold text-[var(--text-primary)]">Simulation Controls</h3>
         </div>
         <button
           type="button"
           onClick={onToggleLiveFlow}
           className={`inline-flex items-center gap-2 rounded-3xl px-4 py-3 text-sm font-semibold transition ${
-            liveFlowMode ? 'bg-emerald-500 text-slate-950' : 'bg-slate-950 text-cyan-300 ring-1 ring-cyan-300/20'
+            liveFlowMode ? 'bg-emerald-500 text-slate-950' : 'bg-[color:var(--surface-base)/0.94] text-[var(--text-primary)] ring-1 ring-[color:var(--accent)/0.2]'
           }`}
         >
           <FaToggleOn />
@@ -59,7 +59,7 @@ export default function SimulationControls({
           <button
             type="button"
             onClick={onStep}
-            className="inline-flex items-center gap-2 rounded-3xl bg-slate-950/80 px-4 py-3 text-sm font-semibold text-slate-100 transition hover:bg-slate-900"
+            className="inline-flex items-center gap-2 rounded-3xl bg-[color:var(--surface-base)/0.94] px-4 py-3 text-sm font-semibold text-[var(--text-primary)] transition hover:bg-[color:var(--surface-base)/0.98]"
           >
             <FaStepForward />
             Step
@@ -67,13 +67,13 @@ export default function SimulationControls({
           <button
             type="button"
             onClick={onReset}
-            className="inline-flex items-center gap-2 rounded-3xl bg-slate-950/80 px-4 py-3 text-sm font-semibold text-slate-100 transition hover:bg-slate-900"
+            className="inline-flex items-center gap-2 rounded-3xl bg-[color:var(--surface-base)/0.94] px-4 py-3 text-sm font-semibold text-[var(--text-primary)] transition hover:bg-[color:var(--surface-base)/0.98]"
           >
             <FaRedo />
             Reset
           </button>
         </div>
-        <div className="rounded-3xl border border-white/10 bg-slate-950/80 p-4 text-sm text-slate-200">
+        <div className="rounded-3xl border border-[var(--border)] bg-[color:var(--surface-base)/0.94] p-4 text-sm text-[var(--text-primary)]">
           <p className="text-slate-400">Speed</p>
           <div className="mt-3 flex items-center gap-3">
             <input
@@ -90,7 +90,7 @@ export default function SimulationControls({
         </div>
       </div>
 
-      <div className="space-y-4 rounded-3xl border border-cyan-300/10 bg-slate-950/80 p-4 text-sm text-slate-200">
+      <div className="space-y-4 rounded-3xl border border-[color:var(--accent)/0.1] bg-[color:var(--surface-base)/0.94] p-4 text-sm text-[var(--text-primary)]">
         <div className="flex items-center justify-between">
           <span>Current cycle</span>
           <strong className="text-white">{cycle}</strong>

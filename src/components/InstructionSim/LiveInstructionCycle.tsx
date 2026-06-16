@@ -29,7 +29,7 @@ export default function LiveInstructionCycle({ instruction = 'ADD R1, R2' }: { i
         <p className="mt-2 font-semibold text-body">{instruction}</p>
       </div>
 
-      <div className="mt-3 grid grid-cols-5 gap-3">
+      <div className="mt-3 grid grid-cols-1 gap-3">
         {STAGES.map((s, i) => (
           <div key={s} className={`p-4 rounded-lg transition-all ${i === index ? 'ring-2 ring-cyan-400 scale-105' : ''} surface-base`}>
             <p className="text-sm text-muted uppercase">{s}</p>

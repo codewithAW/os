@@ -66,11 +66,11 @@ export default function CpuPage() {
             <p className="mt-3 text-slate-300">
               Visualize register state as the CPU loads operands, stores temporary values, and tracks control flow.
             </p>
-            <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-slate-100">
+            <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-[var(--text-primary)]">
               {['PC', 'IR', 'ACC', 'MAR'].map((register) => (
-                <div key={register} className="rounded-3xl bg-slate-900/80 p-4">
+                <div key={register} className="rounded-3xl bg-[color:var(--surface-elevated)/0.92] p-4">
                   <p className="text-cyan-300">{register}</p>
-                  <p className="mt-2 text-slate-300">0x{Math.floor(Math.random() * 65535).toString(16).toUpperCase()}</p>
+                  <p className="mt-2 text-[var(--text-secondary)]">0x{Math.floor(Math.random() * 65535).toString(16).toUpperCase()}</p>
                 </div>
               ))}
             </div>
@@ -83,10 +83,10 @@ export default function CpuPage() {
             <p className="mt-3 text-slate-300">
               A stable clock drives instruction timing. Higher frequency means more cycles per second and better throughput.
             </p>
-            <div className="mt-5 grid grid-cols-1 md:grid-cols-3 gap-3 text-sm text-slate-100">
+            <div className="mt-5 grid grid-cols-1 md:grid-cols-3 gap-3 text-sm text-[var(--text-primary)]">
               {['Fetch', 'Decode', 'Execute'].map((phase) => (
-                <div key={phase} className="rounded-3xl bg-slate-900/80 p-4">
-                  <p className="text-slate-300">{phase}</p>
+                <div key={phase} className="rounded-3xl bg-[color:var(--surface-elevated)/0.92] p-4">
+                  <p className="text-[var(--text-secondary)]">{phase}</p>
                   <p className="mt-2 text-cyan-300">{Math.floor(Math.random() * 5 + 1)} cycles</p>
                 </div>
               ))}
@@ -137,15 +137,15 @@ export default function CpuPage() {
             <p className="mt-3 text-slate-300">
               The ALU processes arithmetic and logic operations while the control unit sequences instructions and data flow.
             </p>
-            <div className="mt-5 space-y-3 text-sm text-slate-200">
-              <div className="rounded-3xl bg-slate-900/80 p-4">ALU performs operations such as ADD, SUB, AND, OR, and comparisons.</div>
-              <div className="rounded-3xl bg-slate-900/80 p-4">Control unit uses instruction bits to generate timing signals and route data through the CPU.</div>
+            <div className="mt-5 space-y-3 text-sm text-[var(--text-primary)]">
+              <div className="rounded-3xl bg-[color:var(--surface-elevated)/0.92] p-4">ALU performs operations such as ADD, SUB, AND, OR, and comparisons.</div>
+              <div className="rounded-3xl bg-[color:var(--surface-elevated)/0.92] p-4">Control unit uses instruction bits to generate timing signals and route data through the CPU.</div>
             </div>
           </div>
-          <div className="rounded-[32px] border border-white/10 bg-slate-950/70 p-5 shadow-glow backdrop-blur-xl">
+          <div className="rounded-[32px] border border-[var(--border)] bg-[color:var(--surface-elevated)/0.92] p-5 shadow-glow backdrop-blur-xl">
             <div className="flex items-center gap-3 text-emerald-300">
               <FaMemory className="h-5 w-5" />
-              <h4 className="text-lg font-semibold text-white">Cache & Memory</h4>
+              <h4 className="text-lg font-semibold text-[var(--text-primary)]">Cache & Memory</h4>
             </div>
             <MemoryFlow />
           </div>
@@ -168,7 +168,7 @@ export default function CpuPage() {
                 className={`rounded-3xl border px-4 py-3 text-left text-sm transition ${
                   selectedCore === mode.cores
                     ? 'border-cyan-300 bg-cyan-500/10 text-white'
-                    : 'border-white/10 bg-slate-900/80 text-slate-300 hover:border-cyan-300/30 hover:bg-slate-900'
+                    : 'border-base bg-[color:var(--surface-elevated)/0.92] text-[var(--text-primary)] hover:border-[color:var(--accent)/0.3] hover:bg-[color:var(--surface-base)/0.94]'
                 }`}
               >
                 <p className="font-semibold">{mode.label}</p>
@@ -177,7 +177,7 @@ export default function CpuPage() {
             ))}
           </div>
         </div>
-        <div className="rounded-[32px] border border-white/10 bg-slate-900/90 p-5">
+        <div className="rounded-[32px] border border-[var(--border)] bg-[color:var(--surface-elevated)/0.92] p-5">
           <div className="grid gap-4 md:grid-cols-2">
             <div>
               <p className="text-sm uppercase tracking-[0.32em] text-cyan-300/70">Workload Distribution</p>
@@ -186,14 +186,14 @@ export default function CpuPage() {
                 A {selectedCore}-core design can distribute independent threads across multiple execution units, reducing wait time and improving responsiveness.
               </p>
             </div>
-            <div className="rounded-3xl bg-slate-950/80 p-4 text-slate-200">
+            <div className="rounded-3xl bg-[color:var(--surface-base)/0.92] p-4 text-[var(--text-primary)]">
               <p className="text-sm text-cyan-300">Logical vs Physical Cores</p>
               <div className="mt-4 grid gap-3">
-                <div className="flex items-center justify-between rounded-3xl bg-slate-900/90 p-3">
+                <div className="flex items-center justify-between rounded-3xl bg-[color:var(--surface-elevated)/0.92] p-3">
                   <span>Physical cores</span>
                   <span>{selectedCore}</span>
                 </div>
-                <div className="flex items-center justify-between rounded-3xl bg-slate-900/90 p-3">
+                <div className="flex items-center justify-between rounded-3xl bg-[color:var(--surface-elevated)/0.92] p-3">
                   <span>Logical threads</span>
                   <span>{selectedCore * 2}</span>
                 </div>
