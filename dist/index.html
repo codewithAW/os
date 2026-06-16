@@ -8,10 +8,26 @@
       content="Operating System Visual Learning Platform - interactive OS and CPU learning experience"
     />
     <title>Operating System Visual Learning Platform</title>
-    <script type="module" crossorigin src="/assets/index-Bd_-Uxqe.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-C08wbY3-.css">
+    <script>
+      // Immediately apply persisted theme or system preference to avoid flash
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          if (stored === 'dark' || stored === 'light') {
+            document.documentElement.classList.toggle('dark', stored === 'dark');
+            return;
+          }
+          var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          document.documentElement.classList.toggle('dark', prefersDark);
+        } catch (e) {
+          // ignore
+        }
+      })();
+    </script>
+    <script type="module" crossorigin src="/assets/index-B5OROPHp.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-t-J2JxoH.css">
   </head>
-  <body class="bg-slate-950 text-slate-100">
+  <body>
     <div id="root"></div>
   </body>
 </html>
